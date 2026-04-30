@@ -1,1 +1,38 @@
+ip dhcp excluded-address 192.168.100.1 192.168.100.10
+ip dhcp excluded-address 192.168.101.1 192.168.101.10
+
+ip dhcp pool VLN-100
+ network 192.168.100.0 255.255.255.0
+ default-router 192.168.100.1
+ dns-server 8.8.4.4
+
+ip dhcp pool VLN-101
+ network 192.168.101.0 255.255.255.0
+ default-router 192.168.101.1
+ dns-server 8.8.4.4
+
+interface GigabitEthernet0/0/0.100
+ encapsulation dot1Q 100
+ ip address 192.168.100.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/0/0.101
+ encapsulation dot1Q 101
+ ip address 192.168.101.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/0/1
+ ip address 203.0.113.1 255.255.255.0
+ ip nat outside
+ duplex auto
+ speed auto
+
+access-list 1 permit 192.168.100.0 0.0.0.255
+access-list 2 permit 192.168.101.0 0.0.0.255
+
+ip nat inside source list 1 interface GigabitEthernet0/0/1 overload
+ip nat inside source list 2 interface GigabitEthernet0/0/1 overload
+
+ip route 0.0.0.0 0.0.0.0 203.0.113.2
+
 
