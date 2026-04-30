@@ -1,0 +1,33 @@
+ip dhcp pool VLN-100
+ network 192.168.100.0 255.255.255.0
+ default-router 192.168.100.1
+ dns-server 8.8.4.4
+ip dhcp pool VLN-101
+ network 192.168.101.0 255.255.255.0
+ default-router 192.168.101.1
+ dns-server 8.8.8.8
+
+
+interface GigabitEthernet1/0/1
+ switchport trunk native vlan 999
+
+interface GigabitEthernet1/0/2
+ no switchport
+ ip address 192.168.102.1 255.255.255.0
+ duplex auto
+ speed auto
+
+
+interface Vlan100
+ mac-address 0006.2a41.6b01
+ ip address 192.168.100.1 255.255.255.0
+!
+interface Vlan101
+ mac-address 0006.2a41.6b02
+ ip address 192.168.101.1 255.255.255.0
+!
+router ospf 1
+ log-adjacency-changes
+ network 192.168.102.0 0.0.0.255 area 0
+ network 192.168.100.0 0.0.0.255 area 0
+ network 192.168.101.0 0.0.0.255 area 0
