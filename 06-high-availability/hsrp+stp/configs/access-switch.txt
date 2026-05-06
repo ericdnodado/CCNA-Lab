@@ -1,0 +1,30 @@
+interface FastEthernet0/1
+ description LINK-TO-DS2
+ switchport trunk native vlan 999
+ switchport mode trunk
+!
+
+interface FastEthernet0/2
+ description LINK-TO-DS1
+ switchport trunk native vlan 999
+ switchport mode trunk
+!
+
+interface FastEthernet0/3
+ description LINK-TO-PHONE0
+ switchport access vlan 200
+ switchport mode access
+ switchport voice vlan 100
+ spanning-tree portfast
+!
+
+interface FastEthernet0/4
+ description LINK-TO-PHONE1
+ switchport access vlan 200
+ switchport mode access
+ switchport voice vlan 100
+ spanning-tree portfast
+!
+
+
+

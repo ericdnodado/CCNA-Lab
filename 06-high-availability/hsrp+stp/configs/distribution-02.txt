@@ -1,0 +1,43 @@
+ip dhcp excluded-address 192.168.100.1 192.168.100.2
+ip dhcp excluded-address 192.168.100.100
+ip dhcp excluded-address 192.168.200.1 192.168.200.2
+ip dhcp excluded-address 192.168.200.100
+!
+
+ip dhcp pool Voice
+ network 192.168.100.0 255.255.255.0
+ default-router 192.168.100.100
+
+ip dhcp pool PC
+ network 192.168.200.0 255.255.255.0
+ default-router 192.168.200.100
+ dns-server 8.8.4.4
+
+spanning-tree mode rapid-pvst
+spanning-tree vlan 200 priority 4096
+spanning-tree vlan 100 priority 8192
+
+interface GigabitEthernet1/0/1
+ switchport trunk native vlan 999
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/2
+ switchport trunk native vlan 999
+ switchport mode trunk
+!
+
+interface Vlan100
+ mac-address 0001.c92b.ae01
+ ip address 192.168.100.2 255.255.255.0
+ standby 100 ip 192.168.100.100
+ standby 100 preempt
+!
+
+interface Vlan200
+ mac-address 0001.c92b.ae02
+ ip address 192.168.200.1 255.255.255.0
+ standby 200 ip 192.168.200.100
+ standby 200 priority 105
+ standby 200 preempt
+!
+
