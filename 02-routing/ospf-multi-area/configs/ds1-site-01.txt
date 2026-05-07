@@ -1,0 +1,32 @@
+interface Vlan100
+ mac-address 0030.a338.e801
+ ip address 192.168.100.1 255.255.255.0
+!
+
+router ospf 1
+ router-id 1.1.1.1
+ log-adjacency-changes
+ network 192.168.1.0 0.0.0.255 area 0
+ network 192.168.100.0 0.0.0.255 area 1
+!
+
+interface GigabitEthernet1/0/1
+ no switchport
+ ip address 192.168.1.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+
+interface GigabitEthernet1/0/2
+ switchport trunk native vlan 999
+ switchport mode trunk
+!
+
+ip dhcp pool IT
+ network 192.168.100.0 255.255.255.0
+ default-router 192.168.100.1
+ dns-server 8.8.4.4
+!
+
+
+
