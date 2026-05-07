@@ -1,0 +1,38 @@
+ip dhcp pool IT
+ network 192.168.102.0 255.255.255.0
+ default-router 192.168.102.1
+ dns-server 8.8.8.8
+ip dhcp pool Engineering
+ network 192.168.103.0 255.255.255.0
+ default-router 192.168.103.1
+ dns-server 8.8.8.8
+!
+
+interface GigabitEthernet1/0/1
+ no switchport
+ ip address 192.168.104.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/2
+ switchport trunk native vlan 999
+ switchport mode trunk
+!
+
+interface Vlan102
+ mac-address 0005.5e8d.7901
+ ip address 192.168.102.1 255.255.255.0
+!
+interface Vlan103
+ mac-address 0005.5e8d.7902
+ ip address 192.168.103.1 255.255.255.0
+!
+router ospf 1
+ router-id 1.1.1.1
+ log-adjacency-changes
+ auto-cost reference-bandwidth 100000
+ network 192.168.104.0 0.0.0.255 area 0
+ network 192.168.102.0 0.0.0.255 area 0
+ network 192.168.103.0 0.0.0.255 area 0
+
+
