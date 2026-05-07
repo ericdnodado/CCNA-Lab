@@ -10,7 +10,6 @@ interface GigabitEthernet1/0/2
  duplex auto
  speed auto
 !
-
 router ospf 1
  router-id 2.2.2.2
  log-adjacency-changes
