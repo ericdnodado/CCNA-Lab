@@ -1,0 +1,22 @@
+interface GigabitEthernet0/0/0
+ ip address 192.168.2.2 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/1
+ ip address 192.168.3.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 192.168.1.0 255.255.255.0 192.168.2.1 
