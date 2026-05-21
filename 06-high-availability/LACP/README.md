@@ -26,3 +26,18 @@ This lab focuses on:
 - Prevents loops while increasing bandwidth
 
 ---
+
+## ⚙️ Configuration
+
+### 🔹 SW1 Configuration
+
+```bash
+interface range gi0/1 - 2
+ switchport mode trunk
+ channel-group 1 mode active
+ lacp rate fast
+
+interface port-channel 1
+ switchport mode trunk
+
+---
