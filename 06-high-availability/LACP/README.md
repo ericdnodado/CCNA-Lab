@@ -16,3 +16,13 @@ This lab focuses on:
 - Verification and troubleshooting commands
 
 ---
+
+## 🧠 Key Concepts
+
+- **LACP (Active/Passive mode)** for dynamic link aggregation
+- **EtherChannel / Port-Channel** logical interface
+- **Load balancing across physical links**
+- **STP treats Port-Channel as a single link**
+- Prevents loops while increasing bandwidth
+
+---
